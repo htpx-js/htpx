@@ -1,15 +1,15 @@
-import { fetchAdapter, nodeAdapter, xhrAdapter } from "./adapters";
-import { defaultConfig } from "./config";
+import { fetchAdapter, nodeAdapter, xhrAdapter } from "./adapters/index.js";
+import { defaultConfig } from "./config.js";
 import {
   applyRequestInterceptors,
   applyResponseInterceptors,
-} from "./interceptors";
-import { CancelToken } from "./utils/cancelToken";
-import { handleProxy } from "./utils/handleProxy";
-import { setupProgressHandlers } from "./utils/progressHandlers";
-import { transformRequest } from "./utils/transformRequest";
-import { transformResponse } from "./utils/transformResponse";
-import { handleXsrfProtection } from "./utils/xsrfProtection";
+} from "./interceptors.js";
+import { CancelToken } from "./utils/cancelToken.js";
+import { handleProxy } from "./utils/handleProxy.js";
+import { setupProgressHandlers } from "./utils/progressHandlers.js";
+import { transformRequest } from "./utils/transformRequest.js";
+import { transformResponse } from "./utils/transformResponse.js";
+import { handleXsrfProtection } from "./utils/xsrfProtection.js";
 
 export async function request(url, userConfig = {}) {
   const config = applyRequestInterceptors({
