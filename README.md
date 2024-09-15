@@ -249,3 +249,17 @@ HTPX includes built-in TypeScript support. The types are automatically recognize
 You can run the tests using **Jest**:
 
     npm run test
+
+## Issues
+
+If you encounter any errors in this component or have suggestions for improvements, please feel free to open an [issue](https://github.com/sendmail2krrish/htpx/issues). I’m eager to hear feedback from the community and would greatly appreciate your input!
+
+## Author Services
+
+Interested in this library but missing certain features? Contact the author, and he can help implement them for you.
+
+## Author
+
+Krishna Paul
+
+[Github](https://github.com/sendmail2krrish)
