@@ -1,6 +1,4 @@
-import { fetchAdapter } from "./adapters/fetchAdapter.js";
-import { nodeAdapter } from "./adapters/nodeAdapter.js";
-import { xhrAdapter } from "./adapters/xhrAdapter.js";
+import { getAdapter } from "./adapters/index.js";
 import { defaultConfig } from "./config.js";
 import {
   applyRequestInterceptors,
@@ -22,7 +20,7 @@ export async function request(url, userConfig = {}) {
   handleXsrfProtection(config);
   handleProxy(config);
 
-  const adapter = config.adapter || getAdapter();
+  const adapter = await (config.adapter || getAdapter());
   setupProgressHandlers(config);
 
   const response = await adapter(url, config);
@@ -31,13 +29,6 @@ export async function request(url, userConfig = {}) {
   return transformResponse(finalResponse, config);
 }
 
-function getAdapter() {
-  if (typeof XMLHttpRequest !== "undefined") return xhrAdapter;
-  if (typeof fetch !== "undefined") return fetchAdapter;
-  return nodeAdapter;
-}
-
-// Helper methods (get, post, put, etc.)
 export function get(url, config = {}) {
   return request(url, { ...config, method: "GET" });
 }

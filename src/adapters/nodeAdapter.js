@@ -7,8 +7,12 @@ export async function nodeAdapter(url, config) {
   return new Promise((resolve, reject) => {
     const req = lib.request(url, config, (res) => {
       let data = "";
-      res.on("data", (chunk) => (data += chunk));
-      res.on("end", () =>
+
+      res.on("data", (chunk) => {
+        data += chunk;
+      });
+
+      res.on("end", () => {
         resolve({
           data,
           status: res.statusCode,
@@ -16,12 +20,20 @@ export async function nodeAdapter(url, config) {
           headers: res.headers,
           config,
           request: req,
-        })
-      );
+        });
+      });
     });
 
-    req.on("error", reject);
-    if (config.data) req.write(config.data);
+    req.on("error", (err) => reject(err));
+
+    if (config.data) {
+      if (typeof config.data === "object" && !Buffer.isBuffer(config.data)) {
+        req.write(JSON.stringify(config.data));
+      } else {
+        req.write(config.data);
+      }
+    }
+
     req.end();
   });
 }
