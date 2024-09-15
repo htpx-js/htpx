@@ -1,4 +1,6 @@
-import { fetchAdapter, nodeAdapter, xhrAdapter } from "./adapters/index.js";
+import { fetchAdapter } from "./adapters/fetchAdapter.js";
+import { nodeAdapter } from "./adapters/nodeAdapter.js";
+import { xhrAdapter } from "./adapters/xhrAdapter.js";
 import { defaultConfig } from "./config.js";
 import {
   applyRequestInterceptors,
