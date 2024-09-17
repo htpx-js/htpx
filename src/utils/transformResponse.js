@@ -20,5 +20,5 @@ export function transformResponse(response, config) {
     );
   }
 
-  return responseData;
+  return { ...response, data: responseData };
 }

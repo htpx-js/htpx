@@ -248,7 +248,7 @@ HTPX includes built-in TypeScript support. The types are automatically recognize
 
 You can run the tests using **Jest**:
 
-    npm run test
+    npm test
 
 ## Issues
 

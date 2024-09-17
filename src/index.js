@@ -1,6 +1,8 @@
 import { getAdapter } from "./adapters/index.js";
 import { defaultConfig } from "./config.js";
 import {
+  addRequestInterceptor,
+  addResponseInterceptor,
   applyRequestInterceptors,
   applyResponseInterceptors,
 } from "./interceptors.js";
@@ -11,11 +13,16 @@ import { transformRequest } from "./utils/transformRequest.js";
 import { transformResponse } from "./utils/transformResponse.js";
 import { handleXsrfProtection } from "./utils/xsrfProtection.js";
 
-export async function request(url, userConfig = {}) {
+export async function request(url, data = null, userConfig = {}) {
   const config = applyRequestInterceptors({
     ...defaultConfig,
     ...userConfig,
   });
+
+  if (data) {
+    config.data = data;
+  }
+
   config.data = transformRequest(config);
   handleXsrfProtection(config);
   handleProxy(config);
@@ -30,23 +37,23 @@ export async function request(url, userConfig = {}) {
 }
 
 export function get(url, config = {}) {
-  return request(url, { ...config, method: "GET" });
+  return request(url, null, { ...config, method: "GET" });
 }
 
 export function post(url, data, config = {}) {
-  return request(url, { ...config, method: "POST", data });
+  return request(url, data, { ...config, method: "POST" });
 }
 
 export function put(url, data, config = {}) {
-  return request(url, { ...config, method: "PUT", data });
+  return request(url, data, { ...config, method: "PUT" });
 }
 
 export function patch(url, data, config = {}) {
-  return request(url, { ...config, method: "PATCH", data });
+  return request(url, data, { ...config, method: "PATCH" });
 }
 
 export function del(url, config = {}) {
-  return request(url, { ...config, method: "DELETE" });
+  return request(url, null, { ...config, method: "DELETE" });
 }
 
 export default {
@@ -57,4 +64,6 @@ export default {
   patch,
   delete: del,
   CancelToken,
+  addRequestInterceptor,
+  addResponseInterceptor,
 };
