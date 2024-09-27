@@ -31,6 +31,10 @@ declare module "my-http-client" {
     proxy?: ProxyConfig;
     cancelToken?: CancelToken;
     adapter?: "xhr" | "fetch" | "node";
+    encryptParams?: boolean;
+    encryptData?: boolean;
+    makeParamsEncryption?: (params: any) => string;
+    makeDataEncryption?: (data: any) => string;
   }
 
   export interface Response {

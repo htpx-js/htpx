@@ -4,6 +4,14 @@ import https from "https";
 export async function nodeAdapter(url, config) {
   const lib = url.startsWith("https") ? https : http;
 
+  if (config.params && typeof config.params === "object") {
+    const urlObj = new URL(url);
+    Object.keys(config.params).forEach((key) =>
+      urlObj.searchParams.append(key, config.params[key])
+    );
+    url = urlObj.toString();
+  }
+
   return new Promise((resolve, reject) => {
     const req = lib.request(url, config, (res) => {
       let data = "";

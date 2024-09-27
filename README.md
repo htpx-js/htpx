@@ -15,6 +15,11 @@ HTPX is a lightweight, flexible HTTP client for JavaScript and Node.js that supp
 - **Progress tracking**: Monitor upload and download progress.
 - **XSRF protection**: Automatically add XSRF tokens from cookies to headers.
 - **Proxy support**: Handle HTTP proxies in Node.js.
+- **Encryption support for `params` and `data`**:
+  - Encrypt query string parameters and send them via the `q` key.
+  - Encrypt the entire request payload and send it under the `data` key.
+  - Optional custom encryption functions for both query parameters and request data, with Base64 encoding as the default.
+- more coming soon...
 
 ## Tutorials
 
@@ -42,12 +47,47 @@ HTPX supports the standard HTTP methods, including `GET`, `POST`, `PUT`, `PATCH`
         console.error(error);
       });
 
+#### GET Request with Query String Encryption
+
+You can also enable encryption for query parameters by using the `encryptParams` option. The entire query string will be encrypted and sent as a `q` key.
+
+    htpx.get('https://jsonplaceholder.typicode.com/posts', {
+      params: { search: 'foo', page: 1 },
+      encryptParams: true,  // Enable encryption for query string
+      makeParamsEncryption: (params) => customEncryptFunction(params)  // Optional custom encryption function
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
 #### POST Request
 
     htpx.post('https://jsonplaceholder.typicode.com/posts', {
       title: 'foo',
       body: 'bar',
       userId: 1
+    })
+      .then(response => {
+        console.log(response.data);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+
+#### POST Request with Data Encryption
+
+You can enable encryption for the request body (data) by using the `encryptData` option. The payload will be encrypted and sent under the `data` key. You can do the same for `PUT` and `PATCH` requests.
+
+    htpx.post('https://jsonplaceholder.typicode.com/posts', {
+      title: 'foo',
+      body: 'bar',
+      userId: 1
+    }, {
+      encryptData: true,  // Enable encryption for the data
+      makeDataEncryption: (data) => customEncryptFunction(data)  // Optional custom encryption function
     })
       .then(response => {
         console.log(response.data);

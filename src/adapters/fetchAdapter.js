@@ -1,4 +1,12 @@
 export async function fetchAdapter(url, config) {
+  if (config.params && typeof config.params === "object") {
+    const urlObj = new URL(url);
+    Object.keys(config.params).forEach((key) =>
+      urlObj.searchParams.append(key, config.params[key])
+    );
+    url = urlObj.toString();
+  }
+
   const response = await fetch(url, config);
 
   let data;

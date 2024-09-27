@@ -23,7 +23,7 @@ export async function request(url, data = null, userConfig = {}) {
     config.data = data;
   }
 
-  config.data = transformRequest(config);
+  transformRequest(config);
   handleXsrfProtection(config);
   handleProxy(config);
 

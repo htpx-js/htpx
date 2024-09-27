@@ -1,6 +1,12 @@
 export function xhrAdapter(url, config) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
+
+    if (config.params && typeof config.params === "object") {
+      const queryString = new URLSearchParams(config.params).toString();
+      url += (url.includes("?") ? "&" : "?") + queryString;
+    }
+
     xhr.open(config.method || "GET", url, true);
 
     if (config.headers) {
