@@ -1,5 +1,7 @@
 # HTPX - HTTP Client
 
+### Version - 1.2.0
+
 HTPX is a lightweight, flexible HTTP client for JavaScript and Node.js that supports both `XMLHttpRequest` and `Fetch` in the browser and `http`/`https` in Node.js. It is designed to be modular, promise-based, and fully equipped with modern features like request cancellation, interceptors, and progress tracking for uploads and downloads.
 
 ## Features
