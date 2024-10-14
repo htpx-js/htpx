@@ -1,6 +1,6 @@
 {
   "name": "htpx",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "src/index.js",
   "types": "types/index.d.ts",
   "type": "module",
@@ -14,13 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sendmail2krrish/htpx.git"
+    "url": "git+https://github.com/htpx-js/htpx.git"
   },
   "author": "Krishna Pau <sendmail2krrish@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/sendmail2krrish/htpx/issues"
+    "url": "https://github.com/htpx-js/htpx/issues"
   },
+  "homepage": "https://github.com/htpx-js/htpx#readme",
   "keywords": [
     "http",
     "client",
